@@ -10,18 +10,19 @@ public class CameraChange : MonoBehaviour
 
     void Start()
     {
-
+        firstPersonCamera.enabled = true;
+        overheadCamera.enabled = false;
     }
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            ShowOverheadView();
+            ShowFirstPersonView();
         }
         else if (Input.GetButtonDown("Fire2"))
         {
-            ShowFirstPersonView();
+            ShowOverheadView();
         }
 
     }
