@@ -16,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
+    bool dash;
+
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
@@ -35,10 +37,46 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            //dash = true;
+        }
+        else if (Input.GetButtonDown("Jump") && dash && !isGrounded)
+        {
+            velocity.z = Mathf.Sqrt(jumpHeight * -4f * gravity);
+            dash = false;
+        }
+        else if (Input.GetButtonDown("Jump") && dash && !isGrounded && Input.GetKey("w"))
+        {
+                velocity.z = Mathf.Sqrt(jumpHeight * -4f * gravity);
+                dash = false;
+        }
+        else if (Input.GetButtonDown("Jump") && dash && !isGrounded && Input.GetKey("s"))
+        {
+            velocity.z = -Mathf.Sqrt(jumpHeight * -4f * gravity);
+            dash = false;
+        }
+        else if (Input.GetButtonDown("Jump") && dash && !isGrounded && Input.GetKey("d"))
+        {
+            velocity.x = -Mathf.Sqrt(jumpHeight * -4f * gravity);
+            dash = false;
+        }
+        else if (Input.GetButtonDown("Jump") && dash && !isGrounded && Input.GetKey("a"))
+        {
+            velocity.x = Mathf.Sqrt(jumpHeight * -4f * gravity);
+            dash = false;
+        }
+
+        //doble salto
+        //velocity.y = Mathf.Sqrt(jumpHeight * -4f * gravity);
+
+        if (isGrounded)
+        {
+            velocity.z = 0;
+            velocity.x = 0;
         }
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
     }
 }

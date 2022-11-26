@@ -8,10 +8,13 @@ public class CameraChange : MonoBehaviour
     public Camera firstPersonCamera;
     public Camera overheadCamera;
 
+    public GameObject playerPointer;
+
     void Start()
     {
         firstPersonCamera.enabled = true;
         overheadCamera.enabled = false;
+        playerPointer.SetActive(false);
     }
 
     void Update()
@@ -31,12 +34,14 @@ public class CameraChange : MonoBehaviour
     {
         firstPersonCamera.enabled = false;
         overheadCamera.enabled = true;
+        playerPointer.SetActive(true);
     }
 
     public void ShowFirstPersonView()
     {
         firstPersonCamera.enabled = true;
         overheadCamera.enabled = false;
+        playerPointer.SetActive(false);
     }
 
 }
