@@ -16,7 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundMask;
     bool isGrounded;
 
-    bool dash;
+    //bool dash;
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "enemy")
+        {
+            print("Daño");
+        }
+    }
 
     void Update()
     {
@@ -39,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             //dash = true;
         }
+
+        /*
         else if (Input.GetButtonDown("Jump") && dash && !isGrounded)
         {
             velocity.z = Mathf.Sqrt(jumpHeight * -4f * gravity);
@@ -64,6 +74,7 @@ public class PlayerMovement : MonoBehaviour
             velocity.x = Mathf.Sqrt(jumpHeight * -4f * gravity);
             dash = false;
         }
+        */
 
         //doble salto
         //velocity.y = Mathf.Sqrt(jumpHeight * -4f * gravity);
